@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack the Rings</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="title">🌈 Stack the Rings 🌈</div>
+        <div class="game-stats">
+            <div class="ring-counter" id="ringCounter">Total Rings: 3</div>
+            <div class="level-counter" id="levelCounter">Level: 1</div>
+        </div>
+        <div class="instructions">Drag the biggest ring first, then the smaller ones!</div>
+        <button class="reset-button" onclick="resetGame()">New Game</button>
+        
+        <div class="wooden-post" id="post"></div>
+        
+        <div class="celebration" id="celebration">🎉 Level Complete! 🎉</div>
+        <div class="error-message" id="errorMessage">❌ Wrong!</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotions Matching Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+  </style>
+</head>
+<body>
+  <h1>Emotions Matching Game 🧠😊</h1>
+  <div id="instructions">
+    Match the emotion shown by the big face with the correct emoji below. Tap on the emoji that best matches the emotion. If you choose correctly, you'll see a ✅ and move to the next level. Ready to test your emotional smarts?
+  </div>
+  <div id="game">
+    <div id="emotion-face">😀</div>
+    <div id="level-info" class="slice">Level 1</div>
+    <div id="score" class="slice">Score: 0</div>
+    <div id="timer" class="slice"></div>
+    <div class="options" id="emoji-options"></div>
+    <button id="restart-btn">Restart Game 🔄</button>
+  </div>
+  <audio id="cheer" src="https://cdn.pixabay.com/audio/2022/03/15/audio_eac4c4e5e3.mp3"></audio>
+  <script src="./script.js"></script>
+</body>
+</html>

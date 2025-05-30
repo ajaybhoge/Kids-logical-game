@@ -25,7 +25,16 @@ const games = {
     'fill-basket': {
         title: 'Fill the Basket',
         file: 'games/fill-basket/index.html'
-    }
+    },
+    'stack-ring': {
+    title: 'Stack The Rings',
+    file: 'games/stack-ring/index.html'
+},
+'emotion-match': {
+    title: 'Match The Emotions',
+    file: 'games/emotion-match/index.html'
+}
+
 };
 
 function launchGame(gameId) {

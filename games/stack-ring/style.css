@@ -1,0 +1,372 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+    user-select: none;
+    touch-action: none;
+    height: 100vh;
+    width: 100vw;
+}
+
+.game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wooden-post {
+    position: absolute;
+    width: 24px;
+    height: 350px;
+    background: linear-gradient(135deg, #8B4513, #CD853F);
+    border-radius: 12px;
+    box-shadow: 
+        inset 2px 0 4px rgba(139, 69, 19, 0.3),
+        4px 4px 15px rgba(0,0,0,0.4);
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wooden-post::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -50px;
+    width: 124px;
+    height: 40px;
+    background: linear-gradient(135deg, #8B4513, #CD853F);
+    border-radius: 20px;
+    box-shadow: 
+        inset 2px 0 4px rgba(139, 69, 19, 0.3),
+        2px 4px 12px rgba(0,0,0,0.4);
+}
+
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 6px 20px rgba(0,0,0,0.2),
+        inset 0 2px 4px rgba(255,255,255,0.3);
+    border: 3px solid rgba(255,255,255,0.4);
+    z-index: 10;
+    transform-origin: center;
+    will-change: transform;
+}
+
+.ring:hover:not(.stacked) {
+    transform: scale(1.05);
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.4);
+}
+
+.ring.wrong {
+    border: 4px solid #FF4444 !important;
+    animation: shake 0.5s ease-in-out;
+    box-shadow: 
+        0 0 20px rgba(255, 68, 68, 0.6),
+        0 6px 20px rgba(0,0,0,0.2),
+        inset 0 2px 4px rgba(255,255,255,0.3);
+}
+
+.ring.stacked {
+    cursor: default;
+    pointer-events: none;
+}
+
+.ring.wiggle {
+    animation: happyWiggle 0.6s ease-in-out infinite;
+}
+
+.ring.sliding {
+    pointer-events: none;
+}
+
+.ring.new-ring {
+    animation: newRingAppear 0.8s ease-out forwards;
+}
+
+.error-message {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #FF4444;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 150;
+    animation: none;
+}
+
+.error-message.show {
+    animation: errorShow 1.5s ease-in-out;
+}
+
+/* Ring sizes - only 3 sizes for initial game */
+.ring-size-1 {
+    width: 180px;
+    height: 180px;
+}
+
+.ring-size-2 {
+    width: 150px;
+    height: 150px;
+}
+
+.ring-size-3 {
+    width: 120px;
+    height: 120px;
+}
+
+.ring-size-4 {
+    width: 90px;
+    height: 90px;
+}
+
+.ring-size-5 {
+    width: 70px;
+    height: 70px;
+}
+
+.ring-size-6 {
+    width: 55px;
+    height: 55px;
+}
+
+.ring-size-7 {
+    width: 45px;
+    height: 45px;
+}
+
+.ring-size-8 {
+    width: 38px;
+    height: 38px;
+}
+
+.ring-size-9 {
+    width: 32px;
+    height: 32px;
+}
+
+.celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #FF6B6B;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.celebration.show {
+    animation: celebrate 2.5s ease-in-out;
+}
+
+.sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #FFD700;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 0 6px #FFD700;
+}
+
+.title {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    color: #2D3748;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.6);
+    z-index: 1000;
+}
+
+.instructions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: #4A5568;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    z-index: 1000;
+}
+
+.reset-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: #FF6B6B;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.reset-button:hover {
+    background: #E53E3E;
+    transform: translateY(-2px);
+}
+
+.game-stats {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1000;
+}
+
+.ring-counter {
+    font-size: 18px;
+    color: #2D3748;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+    margin-bottom: 5px;
+}
+
+.level-counter {
+    font-size: 16px;
+    color: #4A5568;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+}
+
+@keyframes happyWiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-4deg) scale(1.02); }
+    75% { transform: rotate(4deg) scale(1.02); }
+}
+
+@keyframes newRingAppear {
+    0% { 
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
+    100% { 
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes celebrate {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+    }
+    20% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    80% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes sparkleShine {
+    0% { 
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+    }
+    100% { 
+        opacity: 0;
+        transform: scale(0) rotate(360deg);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+@keyframes errorShow {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    20% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    80% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 24px;
+        top: 10px;
+    }
+    
+    .instructions {
+        font-size: 14px;
+        bottom: 10px;
+    }
+    
+    .reset-button {
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .game-stats {
+        top: 50px;
+    }
+
+    .ring-counter {
+        font-size: 16px;
+    }
+
+    .level-counter {
+        font-size: 14px;
+    }
+}

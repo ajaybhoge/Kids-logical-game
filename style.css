@@ -263,3 +263,13 @@ body {
         margin: 1% auto;
     }
 }
+.ring-bg {
+    background: linear-gradient(135deg, hsl(281, 28%, 59%) 0%, #c27f9979 100%);
+}
+.basket-bg {
+    background: linear-gradient(135deg, hsl(190, 25%, 56%) 0%, #7fc2b779 100%);
+}
+.emotion-bg {
+    background: linear-gradient(135deg, hsl(266, 50%, 57%) 0%, #7fc2b779 100%);
+
+}

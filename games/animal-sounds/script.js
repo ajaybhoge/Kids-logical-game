@@ -56,7 +56,7 @@ const animals = [
   let correctAnimal = null;
   let isGameActive = false;
   let questionCount = 0;
-  const totalQuestions = 5; // easier for little kids
+  const totalQuestions = 10; // easier for little kids
   
   function createGrid() {
     animalGrid.innerHTML = '';
@@ -114,7 +114,7 @@ const animals = [
     questionCount++;
     correctAnimal = animals[Math.floor(Math.random() * animals.length)];
     instruction.textContent = `Find the ${correctAnimal.name}!`;
-    await speak(correctAnimal.name, 3);
+    await speak(correctAnimal.name, 2);
   }
   
   function showFeedback(emoji, card, correct) {
